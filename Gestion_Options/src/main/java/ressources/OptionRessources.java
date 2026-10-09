@@ -20,7 +20,6 @@ public class OptionRessources {
     public Response getAllOptions(@QueryParam("domaine") String d) {
         List<Option> l;
         if (d == null || d.isEmpty()) {
-            // No filter supplied → return all options
             l = optB.getListeOptions();
         } else {
             l = optB.getOptionsByDomaine(d);
@@ -58,7 +57,6 @@ public class OptionRessources {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateOption(@PathParam("code")  int code, Option op) {;
-        // Vérifier si l'option existe
         Option optionExistante = optB.getOptionByCode(code);
 
         if (optionExistante == null) {

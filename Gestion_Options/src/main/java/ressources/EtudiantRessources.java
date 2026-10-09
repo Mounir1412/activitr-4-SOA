@@ -70,20 +70,17 @@ public class EtudiantRessources {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateEtudiant(@PathParam("id") String id, Etudiant e) {
 
-        // Vérifier si l'étudiant existe
         Etudiant exist = etB.getEtudiantByIdentifiant(id);
         if (exist == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        // Vérifier les données reçues
         if (e == null || e.getOption() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Les informations de l'etudiant et son option sont obligatoires")
                     .build();
         }
 
-        // Vérifier si l'option existe
 
         Option option = optB.getOptionByCode(e.getOption().getCodeOption());
         if (option == null) {
@@ -106,7 +103,6 @@ public class EtudiantRessources {
     @Produces(MediaType.APPLICATION_XML)
     public Response getEtudiantsByOption(@QueryParam("codeOption") int op) {
 
-        //verifier l'existance de l'option
         Option option = optB.getOptionByCode(op);
         if (option == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
